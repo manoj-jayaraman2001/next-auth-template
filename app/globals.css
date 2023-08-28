@@ -1,4 +1,8 @@
-
+:root{
+  --primary-color: #25CAAC;
+  --primary-dark: #1F9C88;
+  --primary-dark-two: #208F7E;
+}
 
 * {
   box-sizing: border-box;
@@ -12,19 +16,73 @@ body {
   height: 100%;
 }
 
+.center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  gap: 20px;
+  
+}
+.flex-col{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .btn{
   padding: 6px 12px;
   cursor: pointer;
   border: none;
   font-weight: 600;
   color: white;
-  background-color: #25CAAC;
+  background-color: var(--primary-color);
   border-radius: 8px;
+  width: fit-content;
+}
+.btn:hover {
+  background-color: var(--primary-dark); /* Darker shade on hover */
 }
 
+.btn:active {
+  transform: scale(0.95); /* Apply a scale effect on click */
+  background-color: var(--primary-dark-two); /* Darker shade on click */
+}
+.input{
+  padding: 8px 16px;
+  outline: none;
+  border: 2px solid lightgray;
+  border-radius: 8px;
+  font-size: 14.5px;
+}
+.input:focus {
+    outline: none; /* Remove the default browser outline */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+label{
+  font-size: 13px;
+}
 a {
   text-decoration: none;
   padding: 6px 12px;
-
 }
 
+.link-text{
+  color: var(--primary-dark);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media(min-width:512px){
+  .input{
+    width: 300px;
+
+  }
+  .btn{
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
