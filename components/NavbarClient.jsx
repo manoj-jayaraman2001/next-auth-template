@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import MenuIcon from "@/public/menu.svg";
@@ -10,13 +10,29 @@ import "@/app/globals.css";
 
 const NavbarClient = ({ session }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [displayPopver, setDisplayPopver] = useState(false)
+  const [displayPopver, setDisplayPopver] = useState(false);
+  const [clickedInside, setClickedInside] = useState(false);
   const isAuth = usePathname().includes("/auth");
   const router = useRouter();
 
   const UserImage = ({ name }) => {
     return <div className="user-img">{name[0]}</div>;
   };
+
+  function handleClickOutside() {
+    if (clickedInside) {
+      setClickedInside(false);
+    }
+    setDisplayPopver(false);
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [clickedInside]);
 
   return (
     <>
@@ -29,7 +45,17 @@ const NavbarClient = ({ session }) => {
             <Link href="/profile/client">Profile (client)</Link>
             <Link href="/profile/server">Profile (server)</Link>
             <Link href="/dashboard">Dashboard</Link>
-            <div onClick={() => {setDisplayPopver(prev => !prev)}}>
+
+            <div className="pop-over-links">
+              <PopOver />
+            </div>
+
+            <div
+              onClick={() => {
+                setDisplayPopver(true);
+                setClickedInside(true);
+              }}
+            >
               {session.user.image ? (
                 <Image
                   src={session.user.image}
@@ -42,7 +68,7 @@ const NavbarClient = ({ session }) => {
                 <UserImage name={session.user.name} />
               )}
               <div className={`pop-over ${displayPopver ? "" : "pop-close"}`}>
-                <PopOver/>
+                <PopOver />
               </div>
             </div>
           </>

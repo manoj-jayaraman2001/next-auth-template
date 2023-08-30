@@ -3,7 +3,7 @@ import Image from "next/image";
 import moonIcon from "@/public/dark.svg";
 import lightIcon from "@/public/light.svg";
 import signOut from "@/public/signout.svg";
-const PopOver = () => {
+const PopOver = ({setClickedInside}) => {
   const isDark = false;
   return (
     <div>
