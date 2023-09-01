@@ -1,7 +1,12 @@
 import "@/app/globals.css";
 import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
-const Login = () => {
+import GoogleButton from "@/components/GoogleBtn";
+
+const Login = (props) => {
+  
+  const callbackUrl = props.searchParams.callbackUrl || '/'
+  
   return (
     <div className="center">
       <div>
@@ -9,7 +14,10 @@ const Login = () => {
         <p style={{ margin: "10px auto", textAlign: "center" }}>
           Login to Your Account
         </p>
-        <LoginForm/>
+
+        <GoogleButton callbackUrl={callbackUrl} />
+
+        <LoginForm />
       </div>
       <p>
         Don't have an account ?{" "}

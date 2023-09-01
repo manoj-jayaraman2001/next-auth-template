@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import GoogleButton from "./GoogleBtn";
+import Link from "next/link";
+
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   function handleSubmit() {}
@@ -9,9 +10,6 @@ const LoginForm = () => {
   }
   return (
     <>
-      <div onClick={()=>{console.log('google login')}}>
-        <GoogleButton />
-      </div>
       <form onSubmit={handleSubmit} className="flex-col">
         <label htmlFor="email">Email</label>
         <input
@@ -34,6 +32,7 @@ const LoginForm = () => {
           value={credentials.password}
           required
         />
+        <Link href='/' className="link-text" style={{margin: '5px auto', fontSize: '13.5px'}}>Forgot Password?</Link>
         <button type="submit" className="btn" style={{ margin: "10px auto" }}>
           Login
         </button>
